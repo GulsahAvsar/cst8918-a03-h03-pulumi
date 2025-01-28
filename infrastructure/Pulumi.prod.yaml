@@ -7,7 +7,7 @@ config:
   cst8918-a03-infra:memory: '2'
   cst8918-a03-infra:prefixName: 'cst8918-a03-avsa0005'
   cst8918-a03-infra:imageTag: 'v0.1.0'
-  cst8918a03infra:appPath: C:\Users\avsar\Masaüstü\CDO 2\DevOps-IaC\Week 3\cst8918-a03-h03-pulumi
+  cst8918a03infra:appPath: /mnt/c/Users/avsar/Masaüstü/CDO 2/DevOps-IaC/Week 3/cst8918-a03-h03-pulumi
   cst8918a03infra:prefixName: cst8918a03avsa0005
   cst8918a03infra:imageTag: v0.2.0
   cst8918a03infra:containerPort: "80"
