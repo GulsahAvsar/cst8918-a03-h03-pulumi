@@ -2,6 +2,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as resources from '@pulumi/azure-native/resources'
 import * as containerregistry from '@pulumi/azure-native/containerregistry'
 import * as dockerBuild from '@pulumi/docker-build'
+import * as containerinstance from '@pulumi/azure-native/containerinstance'
 
 
 
@@ -59,5 +60,60 @@ const image = new dockerBuild.Image(`${prefixName}-image`, {
       },
     ],
   })
+
+  // Create a container group in the Azure Container App service and make it publicly accessible.
+const containerGroup = new containerinstance.ContainerGroup(
+    `${prefixName}-container-group`,
+    {
+      resourceGroupName: resourceGroup.name,
+      osType: 'linux',
+      restartPolicy: 'always',
+      imageRegistryCredentials: [
+        {
+          server: registry.loginServer,
+          username: registryCredentials.username,
+          password: registryCredentials.password,
+        },
+      ],
+      containers: [
+        {
+          name: imageName,
+          image: image.ref,
+          ports: [
+            {
+              port: containerPort,
+              protocol: 'tcp',
+            },
+          ],
+          environmentVariables: [
+            {
+              name: 'PORT',
+              value: containerPort.toString(),
+            },
+            {
+              name: 'WEATHER_API_KEY',
+              value: 'c2afb787b6d15ac89c2f2606adb3c5cb',
+            },
+          ],
+          resources: {
+            requests: {
+              cpu: cpu,
+              memoryInGB: memory,
+            },
+          },
+        },
+      ],
+      ipAddress: {
+        type: containerinstance.ContainerGroupIpAddressType.Public,
+        dnsNameLabel: `${imageName}`,
+        ports: [
+          {
+            port: publicPort,
+            protocol: 'tcp',
+          },
+        ],
+      },
+    },
+  )
 
   
