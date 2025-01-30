@@ -4,8 +4,6 @@ import * as containerregistry from '@pulumi/azure-native/containerregistry'
 import * as dockerBuild from '@pulumi/docker-build'
 import * as containerinstance from '@pulumi/azure-native/containerinstance'
 
-
-
 // Import the configuration settings for the current stack.
 const config = new pulumi.Config()
 const appPath = config.require('appPath')
@@ -49,7 +47,6 @@ const image = new dockerBuild.Image(`${prefixName}-image`, {
     tags: [pulumi.interpolate`${registry.loginServer}/${imageName}:${imageTag}`],
     context: { location: appPath },
     dockerfile: { location: `${appPath}/Dockerfile` },
-    target: 'production',
     platforms: ['linux/amd64', 'linux/arm64'],
     push: true,
     registries: [
