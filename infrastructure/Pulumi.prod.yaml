@@ -1,9 +1,9 @@
 config:
   azure-native:location: westus3
-  cst8918-a03-ho3-pulumi:appPath: ../
-  cst8918-a03-ho3-pulumi:containerPort: '80'
-  cst8918-a03-ho3-pulumi:publicPort: '80'
-  cst8918-a03-ho3-pulumi:cpu: '1'
-  cst8918-a03-ho3-pulumi:memory: '2'
-  cst8918-a03-ho3-pulumi:prefixName: 'cst8918a03avsa0005'
-  cst8918-a03-ho3-pulumi:imageTag: 'v0.2.0'
+  cst8918a03infra:appPath: ../
+  cst8918a03infra:containerPort: '80'
+  cst8918a03infra:publicPort: '80'
+  cst8918a03infra:cpu: '1'
+  cst8918a03infra:memory: '2'
+  cst8918a03infra:prefixName: 'cst8918a03avsa0005'
+  cst8918a03infra:imageTag: 'v0.2.0'
